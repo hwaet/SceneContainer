@@ -1,0 +1,19 @@
+{
+    "name": "scene-container_editor",
+    "references": [
+        "GUID:6eb8201fb6955714d87c7f9e7e4f939b",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "PS4"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

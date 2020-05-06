@@ -1,0 +1,21 @@
+{
+  "name": "com.hwaet.scene-container",
+  "displayName": "SceneContainer",
+  "dependencies": {
+    "com.unity.inputsystem": "1.0.0"
+  },
+  "author": {
+    "name": "Hwaet",
+    "email": "dev@hwaetgames.com",
+    "url": "http://www.hwaetgames.com"
+  },
+  "version": "0.0.1",
+  "unity": "2020.1",
+  "description": "Scriptable Object to fast-load multiple scenes and supports in-game handling",
+  "keywords": [
+    "unity",
+    "editor"
+  ],
+  "category": "Unity",
+  "hideInEditor": true
+}
