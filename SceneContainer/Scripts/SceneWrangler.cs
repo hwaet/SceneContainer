@@ -45,6 +45,8 @@ public class SceneWrangler : MonoBehaviour {
 
 	Scene[] currentScenes;
 
+	string LOADING_SCREEN_NAME = "loadingScreen";
+
 	/// <summary>
 	/// Restarts the current scene by swapping the next scene with the current one, and calling the usual scene loading process
 	/// </summary>
@@ -88,13 +90,14 @@ public class SceneWrangler : MonoBehaviour {
 				case LevelLoadingProcess.LoadingScreen:
 					//			currentScene = SceneManager.GetActiveScene(); //this.gameObject.scene;
 					setAsPermanent();
-					SceneManager.LoadScene("loadingScreen", LoadSceneMode.Additive);
+					loadingScene = SceneManager.GetSceneByName(LOADING_SCREEN_NAME);
+					if (loadingScene.name != null) SceneManager.LoadScene(LOADING_SCREEN_NAME, LoadSceneMode.Additive);
 					break;
 				case LevelLoadingProcess.SetActiveLoadingScreen:
 					PlayerInput input = FindObjectOfType<PlayerInput>();
 					if (input!=null) input.gameObject.SetActive(false);
-					loadingScene = SceneManager.GetSceneByName("loadingScreen");
-					SceneManager.SetActiveScene(loadingScene);
+					loadingScene = SceneManager.GetSceneByName(LOADING_SCREEN_NAME);
+					if (loadingScene.name != null)	SceneManager.SetActiveScene(loadingScene);
 					break;
 				case LevelLoadingProcess.FadeMusic:
 					if (fadeMusic != null) fadeMusic();
@@ -193,6 +196,8 @@ public class SceneWrangler : MonoBehaviour {
 	/// Method call to wrap up any last steps of the scene loading process. The last of which is self-destructing.
 	/// </summary>
 	void finishLoading() {
+		//GameObject[] gos = loadingScene.GetRootGameObjects();
+		
 		GameObject loadingScreenGameObj = GameObject.FindGameObjectWithTag("loadingScreen");
 		if (loadingScreenGameObj != null)
 		{

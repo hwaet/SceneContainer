@@ -27,6 +27,8 @@ public class SceneContainer : ScriptableObject {
 	//[Header("Scene-speciic Settings")]
 	//public GameSettings settings;
 
+	string GUI_SCENE_NAME = "gui";
+
 	public void OnValidate()
 	{
 		sceneNames = new List<string>(scenes.Count);
@@ -93,7 +95,13 @@ public class SceneContainer : ScriptableObject {
 	
 	public void loadGUI() {
 		if (guiIsActive == true) {
-			SceneManager.LoadScene("GUI",LoadSceneMode.Additive);
+			Scene guiScene = SceneManager.GetSceneByName(GUI_SCENE_NAME);
+			if (guiScene.name == null)
+			{
+				Debug.LogWarning("no scene named " + GUI_SCENE_NAME + " found");
+				return;
+			}
+			SceneManager.LoadScene(GUI_SCENE_NAME, LoadSceneMode.Additive);
 		}
 	}
 
@@ -116,8 +124,8 @@ public class SceneContainer : ScriptableObject {
 		}
 
 		if (guiIsActive == true) {
-			if (SceneManager.GetSceneByName("GUI").isLoaded==true) {
-				SceneManager.UnloadSceneAsync("GUI");
+			if (SceneManager.GetSceneByName(GUI_SCENE_NAME).isLoaded==true) {
+				SceneManager.UnloadSceneAsync(GUI_SCENE_NAME);
 			}
 		}
 	}

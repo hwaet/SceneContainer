@@ -57,7 +57,13 @@ public class ScriptableObjectUtils : MonoBehaviour {
 
 	static void loadGUIInEditor(SceneContainer container) {
 		if (container.guiIsActive) {
-			string GUID = AssetDatabase.FindAssets("gui t:SceneAsset")[0];
+			string[] assetList = AssetDatabase.FindAssets("gui t:SceneAsset");
+			if (assetList.Length == 0)
+			{
+				Debug.LogWarning("no scene named 'gui' found in this project, cannot load it");
+				return;
+			}
+			string GUID = assetList[0];
 			EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(GUID),OpenSceneMode.Additive);//go.name,UnityEngine.SceneManagement.LoadSceneMode.Additive
 		}
 	}
