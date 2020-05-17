@@ -45,7 +45,8 @@ public class SceneWrangler : MonoBehaviour {
 
 	Scene[] currentScenes;
 
-	string LOADING_SCREEN_NAME = "loadingScreen";
+	static string LOADING_SCREEN_NAME = "loadingScreen";
+	static string LOADING_SCREEN_ANIM_TAG = "loadingAnim";
 
 	/// <summary>
 	/// Restarts the current scene by swapping the next scene with the current one, and calling the usual scene loading process
@@ -195,10 +196,9 @@ public class SceneWrangler : MonoBehaviour {
 	/// <summary>
 	/// Method call to wrap up any last steps of the scene loading process. The last of which is self-destructing.
 	/// </summary>
-	void finishLoading() {
-		//GameObject[] gos = loadingScene.GetRootGameObjects();
-		
-		GameObject loadingScreenGameObj = GameObject.FindGameObjectWithTag("loadingScreen");
+	void finishLoading() 
+	{		
+		GameObject loadingScreenGameObj = GameObject.FindGameObjectWithTag(LOADING_SCREEN_ANIM_TAG);
 		if (loadingScreenGameObj != null)
 		{
 			Animator anim = loadingScreenGameObj.GetComponent<Animator>();
