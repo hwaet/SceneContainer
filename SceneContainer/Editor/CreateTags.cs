@@ -16,8 +16,9 @@ public class CreateTags: Editor {
 
 
 	static void createDefaultTags() {
-		string[] dialogTags = new string[]{"loadingScreen","menuCam"};
-		
+		string[] dialogTags = new string[]{"loadingScreen","menuCam","loadingAnim"};
+
+
 		foreach (string tag in dialogTags) {
 			AddTag(tag);
 		}

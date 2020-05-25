@@ -10,7 +10,7 @@ public enum LevelLoadingProcess
 {
 	Idle,
 	LoadingScreen,
-	FadeMusic,
+	FadeAudio,
 	SetActiveLoadingScreen,
 	LoadNextScene,
 	UnloadCurrentScene,
@@ -35,7 +35,7 @@ public class SceneWrangler : MonoBehaviour {
 	public LevelLoadingProcess levelState=LevelLoadingProcess.Idle;
 
 	public delegate void sceneAction();
-	public static event sceneAction fadeMusic;
+	public static event sceneAction fadeAudio;
 	public static event sceneAction sceneLoadStart;
 	public static event sceneAction sceneLoadEnd;
 	public static event sceneAction sceneLoadGUI;
@@ -47,6 +47,8 @@ public class SceneWrangler : MonoBehaviour {
 
 	static string LOADING_SCREEN_NAME = "loadingScreen";
 	static string LOADING_SCREEN_ANIM_TAG = "loadingAnim";
+	static string LOADING_ANIM_STATE_NAME = "unloadScene";
+	static string MENU_CAM_NAME = "menuCamera";
 
 	/// <summary>
 	/// Restarts the current scene by swapping the next scene with the current one, and calling the usual scene loading process
@@ -92,7 +94,10 @@ public class SceneWrangler : MonoBehaviour {
 					//			currentScene = SceneManager.GetActiveScene(); //this.gameObject.scene;
 					setAsPermanent();
 					loadingScene = SceneManager.GetSceneByName(LOADING_SCREEN_NAME);
-					if (loadingScene.name != null) SceneManager.LoadScene(LOADING_SCREEN_NAME, LoadSceneMode.Additive);
+					if (loadingScene.name == null)
+					{
+						SceneManager.LoadScene(LOADING_SCREEN_NAME, LoadSceneMode.Additive);
+					}
 					break;
 				case LevelLoadingProcess.SetActiveLoadingScreen:
 					PlayerInput input = FindObjectOfType<PlayerInput>();
@@ -100,8 +105,8 @@ public class SceneWrangler : MonoBehaviour {
 					loadingScene = SceneManager.GetSceneByName(LOADING_SCREEN_NAME);
 					if (loadingScene.name != null)	SceneManager.SetActiveScene(loadingScene);
 					break;
-				case LevelLoadingProcess.FadeMusic:
-					if (fadeMusic != null) fadeMusic();
+				case LevelLoadingProcess.FadeAudio:
+					if (fadeAudio != null) fadeAudio();
 					break;
 				case LevelLoadingProcess.LoadNextScene:
 					if (sceneLoadStart != null) sceneLoadStart();
@@ -202,7 +207,7 @@ public class SceneWrangler : MonoBehaviour {
 		if (loadingScreenGameObj != null)
 		{
 			Animator anim = loadingScreenGameObj.GetComponent<Animator>();
-			anim.Play("unloadingScreen", -1);
+			anim.Play(LOADING_ANIM_STATE_NAME, -1);
 			Object.Destroy(anim.gameObject, 2f);
 		}
 		Object.Destroy(this.gameObject);
@@ -236,7 +241,7 @@ public class SceneWrangler : MonoBehaviour {
 
 		Camera[] menuCams = FindObjectsOfType<Camera> ();
 		foreach (Camera cam in menuCams) {
-			if (cam.name == "menuCamera") {
+			if (cam.name == MENU_CAM_NAME) {
 				menuCamera = cam;
 			}
 		}

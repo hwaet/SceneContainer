@@ -22,12 +22,10 @@ public class SceneContainer : ScriptableObject {
 	public List<string> backgroundNames = new List<string>();
 
 	[Header("GUI")]
+	static string GUI_SCENE_NAME = "gui";
+	[Tooltip("Searches for a scene that matches the GUI_SCENE_NAME constant to load as a gui container")]
 	public bool guiIsActive = false;
-
-	//[Header("Scene-speciic Settings")]
-	//public GameSettings settings;
-
-	string GUI_SCENE_NAME = "gui";
+	
 
 	public void OnValidate()
 	{
@@ -96,12 +94,7 @@ public class SceneContainer : ScriptableObject {
 	public void loadGUI() {
 		if (guiIsActive == true) {
 			Scene guiScene = SceneManager.GetSceneByName(GUI_SCENE_NAME);
-			if (guiScene.name == null)
-			{
-				Debug.LogWarning("no scene named " + GUI_SCENE_NAME + " found");
-				return;
-			}
-			SceneManager.LoadScene(GUI_SCENE_NAME, LoadSceneMode.Additive);
+			if (guiScene.name == null) SceneManager.LoadScene(GUI_SCENE_NAME, LoadSceneMode.Additive);
 		}
 	}
 
