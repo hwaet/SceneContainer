@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 [System.Serializable]
 public enum LevelLoadingProcess
@@ -47,7 +47,7 @@ public class SceneWrangler : MonoBehaviour {
 
 	static string LOADING_SCREEN_NAME = "loadingScreen";
 	static string LOADING_SCREEN_ANIM_TAG = "loadingAnim";
-	static string LOADING_ANIM_STATE_NAME = "unloadScene";
+	public static string LOADING_ANIM_STATE_NAME = "unloadScene";
 	static string MENU_CAM_NAME = "menuCamera";
 
 	/// <summary>
@@ -225,8 +225,7 @@ public class SceneWrangler : MonoBehaviour {
 		if (currentES==null) {
 			GameObject es = new GameObject("EventSystem");
 			es.AddComponent<EventSystem> ();
-			es.AddComponent<StandaloneInputModule> ();
-			es.AddComponent<BaseInputModule> ();
+			es.AddComponent<InputSystemUIInputModule> ();
 			es.GetComponent<EventSystem>().UpdateModules();
 			print ("adding event system");
 		}
