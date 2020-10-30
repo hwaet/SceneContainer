@@ -224,7 +224,7 @@ public class SceneWrangler : MonoBehaviour {
 		EventSystem currentES = FindObjectOfType<EventSystem>();
 		if (currentES==null) {
 			GameObject es = new GameObject("EventSystem");
-			es.AddComponent<EventSystem> ();
+			//es.AddComponent<EventSystem> ();
 			es.AddComponent<InputSystemUIInputModule> ();
 			es.GetComponent<EventSystem>().UpdateModules();
 			print ("adding event system");
