@@ -90,8 +90,7 @@ public class SceneWrangler : MonoBehaviour {
 				case LevelLoadingProcess.LoadingScreen:
 					//			currentScene = SceneManager.GetActiveScene(); //this.gameObject.scene;
 					setAsPermanent();
-					loadingScene = SceneManager.GetSceneByName(LOADING_SCREEN_NAME);
-					if (loadingScene.name != null) SceneManager.LoadScene(LOADING_SCREEN_NAME, LoadSceneMode.Additive);
+					SceneManager.LoadScene(LOADING_SCREEN_NAME, LoadSceneMode.Additive);
 					break;
 				case LevelLoadingProcess.SetActiveLoadingScreen:
 					PlayerInput input = FindObjectOfType<PlayerInput>();
